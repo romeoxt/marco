@@ -1,20 +1,11 @@
 const nav = document.querySelector("#site-nav");
 const toggle = document.querySelector(".menu-toggle");
-const dialog = document.querySelector("#estimate");
 const form = document.querySelector("#estimate-form");
 const confirm = document.querySelector("#confirm");
 const error = document.querySelector(".form-error");
 const submitButton = form.querySelector("[type=submit]");
 const defaultSubmitLabel = submitButton.textContent;
 const requestKey = "cisneros-request";
-
-function showForm() {
-  form.hidden = false;
-  confirm.hidden = true;
-  error.hidden = true;
-  submitButton.disabled = false;
-  submitButton.textContent = defaultSubmitLabel;
-}
 
 function showConfirmation(details) {
   const email = confirm.querySelector(".confirm-email");
@@ -24,7 +15,7 @@ function showConfirmation(details) {
   form.hidden = true;
   confirm.hidden = false;
   error.hidden = true;
-  dialog.showModal();
+  confirm.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
 toggle.addEventListener("click", () => {
@@ -37,20 +28,6 @@ nav.addEventListener("click", (event) => {
     nav.classList.remove("is-open");
     toggle.setAttribute("aria-expanded", "false");
   }
-});
-
-document.querySelectorAll("[data-open-estimate]").forEach((button) => {
-  button.addEventListener("click", () => {
-    form.reset();
-    showForm();
-    dialog.showModal();
-  });
-});
-
-document.querySelectorAll("[data-close-estimate]").forEach((button) => {
-  button.addEventListener("click", () => {
-    dialog.close();
-  });
 });
 
 form.addEventListener("submit", (event) => {
@@ -82,6 +59,6 @@ if (params.get("request") === "sent") {
   sessionStorage.removeItem(requestKey);
   showConfirmation(details);
   params.delete("request");
-  const next = `${window.location.pathname}${params.toString() ? `?${params}` : ""}${window.location.hash}`;
+  const next = `${window.location.pathname}${params.toString() ? `?${params}` : ""}`;
   window.history.replaceState({}, "", next);
 }
