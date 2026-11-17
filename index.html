@@ -19,10 +19,7 @@
   <body>
     <header class="nav">
       <a class="logo" href="#top" aria-label="Cisneros Co.">
-        <span class="mark">
-          <img src="assets/sun.svg" alt="" />
-          <span>C</span>
-        </span>
+        <img class="mark" src="assets/logo.png" alt="" />
         <span class="logo-name">Cisneros Co.</span>
       </a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
@@ -48,12 +45,7 @@
             <a class="btn btn-outline" href="#work">See our work</a>
           </div>
         </div>
-        <div class="hero-mark" aria-hidden="true">
-          <span class="mark mark-light">
-            <img src="assets/sun.svg" alt="" />
-            <span>C</span>
-          </span>
-        </div>
+        <img class="hero-mark" src="assets/logo.png" alt="" />
       </section>
 
       <section id="services" class="band">
@@ -199,40 +191,136 @@
 
       <section id="estimate" class="estimate-section">
         <div class="wrap estimate-wrap">
-          <div id="confirm" class="confirm" hidden>
-            <h2>Thank you. We’ll be in touch.</h2>
-            <p class="confirm-lead">A confirmation is on its way to <strong class="confirm-email"></strong>. We’ll call <strong class="confirm-phone"></strong> to arrange a visit.</p>
-            <p>If you need us sooner, call <a href="tel:+13468991563">(346) 899-1563</a>.</p>
-          </div>
-          <form id="estimate-form" action="https://formsubmit.co/marcos155796@gmail.com" method="POST">
-            <div class="estimate-head">
-              <h2>Get a free estimate</h2>
-              <p>Tell us about your project and we’ll get back to you shortly.</p>
+          <div id="cc-intake" class="cc">
+            <h2>Get your project estimate</h2>
+            <p class="sub">5 quick steps, about 2 minutes. Photos help us give you an accurate ballpark without a site visit.</p>
+
+            <div class="prog" aria-hidden="true">
+              <div class="prog-bar"><div class="prog-fill"></div></div>
+              <div class="prog-labels"><span class="on">1. Project</span><span>2. Photos</span><span>3. Size</span><span>4. Budget</span><span>5. Contact</span></div>
             </div>
-            <label>
-              Name
-              <input name="name" type="text" required autocomplete="name" />
-            </label>
-            <label>
-              Phone
-              <input name="phone" type="tel" required autocomplete="tel" />
-            </label>
-            <label>
-              Email
-              <input name="email" type="email" required autocomplete="email" />
-            </label>
-            <label>
-              What needs painting?
-              <textarea name="message" rows="5" required></textarea>
-            </label>
-            <input type="hidden" name="_subject" value="New estimate request — Cisneros Co." />
-            <input type="hidden" name="_template" value="table" />
-            <input type="hidden" name="_next" value="https://www.cisnerosco.com/?request=sent" />
-            <input type="hidden" name="_autoresponse" value="Thank you for contacting Cisneros Co.&#10;&#10;We have received your request for a free estimate. A member of our family will call you soon to arrange a visit. There is no pressure and no obligation.&#10;&#10;If you would like to reach us directly, call (346) 899-1563.&#10;&#10;Cisneros Co.&#10;Fine interior and exterior painting&#10;11426 Caesar Dr, Stafford, TX" />
-            <input class="honey" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
-            <button class="btn btn-navy" type="submit">Request my estimate</button>
-            <p class="form-error" hidden>The request didn’t send. Please call (346) 899-1563.</p>
-          </form>
+            <div class="sr" aria-live="polite" id="cc-live"></div>
+
+            <form id="cc-form" novalidate>
+              <section data-step="1" aria-labelledby="cc-h1">
+                <h3 id="cc-h1" tabindex="-1">What kind of project is it?</h3>
+                <p class="sub">Pick the one that fits best.</p>
+                <div class="cards" id="cc-types" role="group" aria-label="Project type"></div>
+                <div class="err" id="cc-e-type" role="alert"></div>
+                <div class="btns"><span></span><button type="button" class="btn" data-go="2">Next</button></div>
+              </section>
+
+              <section data-step="2" aria-labelledby="cc-h2" hidden>
+                <h3 id="cc-h2" tabindex="-1">Add photos of the space</h3>
+                <p class="sub">Upload wide-angle photos showing the full workspace. Add close-ups of any damage, peeling or rot.</p>
+                <div class="drop" id="cc-drop">
+                  <div class="drop-title">Drag photos here</div>
+                  <div class="opt">JPG, PNG or HEIC · up to 10 MB each · up to <span class="cc-max">10</span> photos</div>
+                  <div class="drop-btns">
+                    <button type="button" class="btn sm" id="cc-camera-btn">Take a photo</button>
+                    <button type="button" class="btn sm ghost" id="cc-pick-btn">Choose from device</button>
+                  </div>
+                  <input type="file" id="cc-camera" accept="image/*" capture="environment" hidden>
+                  <input type="file" id="cc-files" accept="image/jpeg,image/png,image/heic,image/heif,.heic,.heif,.jpg,.jpeg,.png" multiple hidden>
+                </div>
+                <div class="thumbs" id="cc-thumbs" aria-label="Selected photos"></div>
+                <div class="count" id="cc-count"></div>
+                <div class="err" id="cc-e-photos" role="alert"></div>
+                <div class="btns"><button type="button" class="btn ghost" data-go="1">Back</button><button type="button" class="btn" data-go="3">Next</button></div>
+              </section>
+
+              <section data-step="3" aria-labelledby="cc-h3" hidden>
+                <h3 id="cc-h3" tabindex="-1">Size and scope</h3>
+                <p class="sub">Measurements are optional. Rough numbers are fine, and they let us price it faster.</p>
+                <div class="unit-row">
+                  <span class="lbl">Measurements <span class="opt">(optional)</span></span>
+                  <div class="seg" role="group" aria-label="Units"><button type="button" data-unit="ft" aria-pressed="true">Feet</button><button type="button" data-unit="in" aria-pressed="false">Inches</button></div>
+                </div>
+                <div class="hint" id="cc-dim-hint"></div>
+                <div class="row3">
+                  <div class="field"><label class="lbl" for="cc-len">Length <span class="opt cc-u">(ft)</span></label><input type="number" id="cc-len" inputmode="decimal" min="0" step="any" placeholder="—"></div>
+                  <div class="field"><label class="lbl" for="cc-wid">Width <span class="opt cc-u">(ft)</span></label><input type="number" id="cc-wid" inputmode="decimal" min="0" step="any" placeholder="—"></div>
+                  <div class="field"><label class="lbl" for="cc-hei">Height <span class="opt cc-u">(ft)</span></label><input type="number" id="cc-hei" inputmode="decimal" min="0" step="any" placeholder="—"></div>
+                </div>
+                <div class="err" id="cc-e-dims" role="alert"></div>
+                <fieldset>
+                  <legend class="lbl">What should we include? <span class="opt">(pick all that apply)</span></legend>
+                  <div class="checks" id="cc-scope"></div>
+                </fieldset>
+                <div class="field"><label class="lbl" for="cc-notes">Anything else we should know? <span class="opt">(optional)</span></label>
+                  <textarea id="cc-notes" maxlength="2000" placeholder="Colors you're thinking about, problem areas, HOA rules, access..."></textarea></div>
+                <div class="btns"><button type="button" class="btn ghost" data-go="2">Back</button><button type="button" class="btn" data-go="4">Next</button></div>
+              </section>
+
+              <section data-step="4" aria-labelledby="cc-h4" hidden>
+                <h3 id="cc-h4" tabindex="-1">Budget and timing</h3>
+                <p class="sub">This helps us recommend the right options. It won't change our pricing.</p>
+                <div class="field"><label class="lbl" for="cc-budget">Budget range</label>
+                  <select id="cc-budget"><option value="">Select a range</option></select>
+                  <div class="err" id="cc-e-budget" role="alert"></div></div>
+                <fieldset>
+                  <legend class="lbl">When do you want to start?</legend>
+                  <div class="radios" id="cc-timeline"></div>
+                  <div class="err" id="cc-e-timeline" role="alert"></div>
+                </fieldset>
+                <div class="btns"><button type="button" class="btn ghost" data-go="3">Back</button><button type="button" class="btn" data-go="5">Next</button></div>
+              </section>
+
+              <section data-step="5" aria-labelledby="cc-h5" hidden>
+                <h3 id="cc-h5" tabindex="-1">Review and send</h3>
+                <p class="sub">Check your details, then tell us where to send your ballpark.</p>
+                <div class="summary"><dl id="cc-summary"></dl></div>
+                <div class="disclaimer" role="note">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9a6b12" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v5M12 16.5v.5" stroke-linecap="round"/></svg>
+                  <div><b>About your estimate</b>Estimates generated from this submission are preliminary range ballparks based on your inputs. Final firm proposals require an on-site verification measurement.</div>
+                </div>
+                <div class="banner" id="cc-banner" role="alert"></div>
+                <div class="field" id="cc-biz-wrap" hidden><label class="lbl" for="cc-biz">Business name</label><input type="text" id="cc-biz" autocomplete="organization" maxlength="120"></div>
+                <div class="row">
+                  <div class="field"><label class="lbl" for="cc-name">Full name</label><input type="text" id="cc-name" autocomplete="name" maxlength="100"><div class="err" id="cc-e-name" role="alert"></div></div>
+                  <div class="field"><label class="lbl" for="cc-phone">Mobile phone</label><input type="tel" id="cc-phone" autocomplete="tel-national" inputmode="tel" placeholder="(555) 555-5555" maxlength="16"><div class="err" id="cc-e-phone" role="alert"></div></div>
+                </div>
+                <div class="field"><label class="lbl" for="cc-email">Email</label><input type="email" id="cc-email" autocomplete="email" inputmode="email" maxlength="200"><div class="err" id="cc-e-email" role="alert"></div></div>
+                <div class="field"><label class="lbl" for="cc-street">Job-site address</label><input type="text" id="cc-street" autocomplete="address-line1" placeholder="Street address" maxlength="200"><div class="err" id="cc-e-street" role="alert"></div></div>
+                <div class="row">
+                  <div class="field"><label class="lbl" for="cc-city">City</label><input type="text" id="cc-city" autocomplete="address-level2" maxlength="100"><div class="err" id="cc-e-city" role="alert"></div></div>
+                  <div class="field"><label class="lbl" for="cc-zip">ZIP code</label><input type="text" id="cc-zip" autocomplete="postal-code" inputmode="numeric" maxlength="10"><div class="err" id="cc-e-zip" role="alert"></div></div>
+                </div>
+                <fieldset>
+                  <legend class="lbl">Best way to reach you</legend>
+                  <div class="pills">
+                    <label class="radio"><input type="radio" name="cc-pref" value="text" checked><b>Text</b></label>
+                    <label class="radio"><input type="radio" name="cc-pref" value="call"><b>Call</b></label>
+                    <label class="radio"><input type="radio" name="cc-pref" value="email"><b>Email</b></label>
+                  </div>
+                </fieldset>
+                <div class="hp" aria-hidden="true"><label>Website <input type="text" id="cc-website" tabindex="-1" autocomplete="off"></label></div>
+                <div class="btns"><button type="button" class="btn ghost" data-go="4">Back</button><button type="submit" class="btn" id="cc-submit">Get my estimate</button></div>
+                <p class="fine">By submitting, you agree Cisneros Co. may call, text or email you about this project. Message and data rates may apply. We never sell your information.</p>
+              </section>
+            </form>
+
+            <dialog id="cc-modal" aria-labelledby="cc-m-title">
+              <div class="modal">
+                <div class="check-ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2e5e2c" stroke-width="2.5" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                <h3 id="cc-m-title">Thanks, <span id="cc-m-name">there</span>. We've got it.</h3>
+                <div class="range" id="cc-m-range" hidden>
+                  <div class="opt">Your preliminary ballpark</div>
+                  <div class="num" id="cc-m-num"></div>
+                  <div class="opt">Preliminary range based on your inputs. A firm proposal needs an on-site measurement.</div>
+                </div>
+                <ol class="steps-next">
+                  <li><b id="cc-m-when">Within 1 business day:</b> we review your photos and <span id="cc-m-how">text</span> you a confirmed ballpark.</li>
+                  <li><b>Free on-site visit:</b> we verify measurements and pick colors with you.</li>
+                  <li><b>Firm written proposal</b> within 48 hours of the visit.</li>
+                </ol>
+                <div class="modal-actions">
+                  <a class="btn" id="cc-m-call" href="tel:+13468991563">Call (346) 899-1563</a>
+                  <button type="button" class="btn ghost" id="cc-m-close">Done</button>
+                </div>
+              </div>
+            </dialog>
+          </div>
         </div>
       </section>
     </main>
@@ -249,5 +337,6 @@
     </footer>
 
     <script src="main.js"></script>
+    <script src="intake.js"></script>
   </body>
 </html>
