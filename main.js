@@ -12,3 +12,27 @@ nav.addEventListener("click", (event) => {
     toggle.setAttribute("aria-expanded", "false");
   }
 });
+
+const watchButton = document.querySelector("#watch-process");
+const lightbox = document.querySelector("#process-lightbox");
+const processVideo = document.querySelector("#process-video");
+
+function closeLightbox() {
+  processVideo.pause();
+  lightbox.close();
+}
+
+watchButton.addEventListener("click", () => {
+  lightbox.showModal();
+  processVideo.play().catch(() => {});
+});
+
+lightbox.addEventListener("click", (event) => {
+  if (event.target === lightbox) closeLightbox();
+});
+
+lightbox.addEventListener("close", () => {
+  processVideo.pause();
+});
+
+lightbox.querySelector("[data-close-lightbox]").addEventListener("click", closeLightbox);

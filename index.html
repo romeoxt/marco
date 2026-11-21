@@ -186,6 +186,24 @@
               <p>We look at the work with you until every line meets your approval.</p>
             </li>
           </ol>
+          <div class="process-film">
+            <button class="watch-btn" type="button" id="watch-process">
+              <span class="watch-play" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="30" height="30"><path d="M9 7.2v9.6l8.2-4.8L9 7.2z" fill="currentColor"/></svg>
+              </span>
+              <span class="watch-copy">
+                <strong>Watch the process</strong>
+                <span>Play a short video of the work</span>
+              </span>
+            </button>
+            <a class="ig" href="https://www.instagram.com/cisnerosco.painting/" target="_blank" rel="noopener noreferrer" aria-label="Cisneros Co. on Instagram">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                <circle cx="17.3" cy="6.7" r="1.1" fill="currentColor"/>
+              </svg>
+            </a>
+          </div>
         </div>
       </section>
 
@@ -332,9 +350,27 @@
         <span aria-hidden="true">·</span>
         <a href="mailto:marcos155796@gmail.com">marcos155796@gmail.com</a>
         <span aria-hidden="true">·</span>
+        <a class="ig" href="https://www.instagram.com/cisnerosco.painting/" target="_blank" rel="noopener noreferrer" aria-label="Cisneros Co. on Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="17.3" cy="6.7" r="1.1" fill="currentColor"/>
+          </svg>
+        </a>
+        <span aria-hidden="true">·</span>
         <span>11426 Caesar Dr, Stafford, TX</span>
       </p>
     </footer>
+
+    <dialog id="process-lightbox" class="lightbox" aria-labelledby="process-lightbox-title">
+      <div class="lightbox-frame">
+        <h2 id="process-lightbox-title" class="lightbox-title">The painting process</h2>
+        <button class="lightbox-close" type="button" data-close-lightbox aria-label="Close video">Close</button>
+        <video id="process-video" controls playsinline preload="metadata">
+          <source src="VID_20261121_111001.mp4" type="video/mp4">
+        </video>
+      </div>
+    </dialog>
 
     <script src="main.js"></script>
     <script src="intake.js"></script>
